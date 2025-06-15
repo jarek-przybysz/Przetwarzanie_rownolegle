@@ -1,0 +1,2 @@
+# Przetwarzanie_rownolegle
+Przetwarzanie równoległe
