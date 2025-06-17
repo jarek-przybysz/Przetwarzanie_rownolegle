@@ -131,10 +131,6 @@ bool parse_tsp_file(const std::string &filename, float *&h_distance_matrix, floa
             {
                 if (edge_type == "EUC_2D" || edge_type == ":" || edge_type.empty())
                     d = calculate_euc_2d_distance(cities_nodes[i], cities_nodes[j]);
-                else if (edge_type == "ATT")
-                    d = calculate_att_distance(cities_nodes[i], cities_nodes[j]);
-                else if (edge_type == "CEIL_2D")
-                    d = calculate_ceil_2d_distance(cities_nodes[i], cities_nodes[j]);
                 else
                 {
                     std::cerr << "EDGE_WEIGHT_TYPE " << edge_type << " nieobsługiwany\n";
