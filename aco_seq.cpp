@@ -82,15 +82,6 @@ double calculate_euc_2d_distance(const City &a, const City &b)
     return std::round(std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
 }
 
-double calculate_att_distance(const City &a, const City &b)
-{
-    double xd = a.x - b.x;
-    double yd = a.y - b.y;
-    double rij = std::sqrt((xd * xd + yd * yd) / 10.0);
-    return std::round(rij);
-}
-
-
 // -------------------------------- PARSOWANIE TSPLIB ---------------------------
 bool parse_tsp_file(const std::string &filename)
 {
