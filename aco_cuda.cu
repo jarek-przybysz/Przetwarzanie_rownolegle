@@ -415,7 +415,6 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; ++i)
     {
         const std::string filename = argv[i];
-        std::cout << "\n[" << i << "/" << argc - 1 << "] Przetwarzanie pliku: " << filename << "\n";
 
         float *h_distance_matrix = nullptr, *h_heuristic_matrix = nullptr;
         if (!parse_tsp_file(filename, h_distance_matrix, h_heuristic_matrix))
