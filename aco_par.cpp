@@ -301,7 +301,6 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; ++i)
     {
         const std::string filename = argv[i];
-        std::cout << "\n[" << i << "/" << argc - 1 << "] Przetwarzanie pliku: " << filename << "\n";
 
         if (!parse_tsp_file(filename))
             continue; 
