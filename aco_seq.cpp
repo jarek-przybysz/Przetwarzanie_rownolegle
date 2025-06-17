@@ -15,8 +15,8 @@
 // -----------------------------  STRUKTURY DANYCH  -----------------------------
 struct City
 {
-    int id;      // 1-indeksowane ID z pliku
-    double x, y; // współrzędne
+    int id;      
+    double x, y;
 };
 
 // ---------------------------  GLOBALNE PARAMETRY  -----------------------------
@@ -27,7 +27,7 @@ std::vector<std::vector<double>> pheromone_matrix;
 std::vector<std::vector<double>> heuristic_matrix;
 std::string tsp_name;
 namespace fs = std::filesystem;
-// Parametry ACO – możesz modyfikować do woli
+// Parametry ACO
 int num_ants = 300;
 double alpha = 1.0;
 double beta = 3.0;
@@ -68,10 +68,10 @@ int select_next_city(int current_city_idx, const Ant &ant);
 void update_pheromones(const std::vector<int> &tour, double length);
 inline void eat_ws_and_colon(std::stringstream &ss)
 {
-    ss >> std::ws;        // spacje przed
-    if (ss.peek() == ':') // jest ':' ?
-        ss.get();         // usuń
-    ss >> std::ws;        // spacje po
+    ss >> std::ws;        
+    if (ss.peek() == ':') 
+        ss.get();         
+    ss >> std::ws;        
 }
 // ---------------------------  POMOCNICZE ODLEGŁOŚCI  --------------------------
 double calculate_euc_2d_distance(const City &a, const City &b)
@@ -116,7 +116,6 @@ bool parse_tsp_file(const std::string &filename)
         {
             ss >> key;
             std::transform(key.begin(), key.end(), key.begin(), ::toupper);
-            // printf("Parsing key: %s\n", key.c_str());
             if (key == "NAME" || key == "NAME:")
             {
                 eat_ws_and_colon(ss);
@@ -187,10 +186,6 @@ bool parse_tsp_file(const std::string &filename)
             double d;
             if (edge_type == "EUC_2D" || edge_type == ":" || edge_type.empty())
                 d = calculate_euc_2d_distance(cities_nodes[i], cities_nodes[j]);
-            else if (edge_type == "ATT")
-                d = calculate_att_distance(cities_nodes[i], cities_nodes[j]);
-            else if (edge_type == "CEIL_2D")
-                d = calculate_ceil_2d_distance(cities_nodes[i], cities_nodes[j]);
             else
             {
                 std::cerr << "EDGE_WEIGHT_TYPE " << edge_type << " nieobsługiwany\n";
@@ -301,8 +296,7 @@ int main()
 {
     constexpr char DATA_DIR[] = "data";
     std::vector<fs::path> tsp_files;
-
-    // zbierz tylko *.tsp
+    
     for (const auto &e : fs::directory_iterator(DATA_DIR))
         if (e.is_regular_file() && e.path().extension() == ".tsp")
             tsp_files.push_back(e.path());
@@ -325,9 +319,8 @@ int main()
         std::cout << "\n[" << idx + 1 << "/" << tsp_files.size()
                   << "] " << tsp_files[idx].filename() << "\n";
 
-        // --- dokładnie to, co robiłeś dla jednego pliku ---
         if (!parse_tsp_file(filename))
-            continue; // pomiń, jeśli błąd
+            continue; 
 
         initialize_aco_data_structures();
 
