@@ -282,20 +282,12 @@ void run_aco(std::vector<int> &best_tour, double &best_len)
     }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
-    constexpr char DATA_DIR[] = "data";
-    std::vector<fs::path> tsp_files;
-    
-    for (const auto &e : fs::directory_iterator(DATA_DIR))
-        if (e.is_regular_file() && e.path().extension() == ".tsp")
-            tsp_files.push_back(e.path());
-
-    std::sort(tsp_files.begin(), tsp_files.end()); // alfabetycznie
-
-    if (tsp_files.empty())
+    if (argc < 2)
     {
-        std::cerr << "Brak plików .tsp w " << DATA_DIR << "\n";
+        std::cerr << "Błąd: Podaj przynajmniej jeden plik .tsp jako argument." << std::endl;
+        std::cerr << "Użycie: " << argv[0] << " <plik1.tsp> [plik2.tsp] ..." << std::endl;
         return 1;
     }
 
@@ -303,11 +295,11 @@ int main()
     log << "NAME" << '\t'
         << "BEST LEN" << '\t'
         << "TIME" << std::endl;
-    for (size_t idx = 0; idx < tsp_files.size(); ++idx)
+
+    for (int i = 1; i < argc; ++i)
     {
-        const std::string filename = tsp_files[idx].string();
-        std::cout << "\n[" << idx + 1 << "/" << tsp_files.size()
-                  << "] " << tsp_files[idx].filename() << "\n";
+        const std::string filename = argv[i];
+        std::cout << "\n[" << i << "/" << argc - 1 << "] Przetwarzanie pliku: " << filename << "\n";
 
         if (!parse_tsp_file(filename))
             continue; 
@@ -332,5 +324,6 @@ int main()
                 << ms << " ms" << std::endl;
         }
     }
+
     return 0;
 }
