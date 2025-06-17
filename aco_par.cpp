@@ -266,7 +266,7 @@ void run_aco(std::vector<int> &global_best_tour, double &global_best_len)
 // ---- parallel section: each ant builds its tour --------------------------------
 #pragma omp parallel
         {
-            init_thread_rng(); // ensure TLS rng seeded
+            init_thread_rng(); 
 #pragma omp for schedule(static)
             for (int i = 0; i < num_ants; ++i)
             {
