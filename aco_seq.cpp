@@ -1,4 +1,7 @@
 // ANT Colony Optimization for TSP Single-threaded version
+//g++ aco_seq.cpp -o aco_seq -std=c++17 -O2   
+//./aco_seq
+
 #include <iostream>
 #include <vector>
 #include <string>
