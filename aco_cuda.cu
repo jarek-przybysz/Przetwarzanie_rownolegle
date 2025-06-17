@@ -1,3 +1,6 @@
+//Ant Colony Optimization for TSP – CUDA version
+// !nvcc -o aco_runner aco_cuda.cu -arch=sm_75 -O3
+// ./aco_runner berlin52.tsp eil101.tsp eil51.tsp pr107.tsp rat99.tsp st70.tsp u159.tsp
 #include <iostream>
 #include <vector>
 #include <string>
