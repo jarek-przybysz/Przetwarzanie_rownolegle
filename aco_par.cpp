@@ -1,18 +1,5 @@
 // Ant Colony Optimization for TSP – OpenMP-parallel version
-// -----------------------------------------------------------------------------
-// Compile (GCC / Clang with OpenMP):
-//   g++-1 aco_parallel.cpp -o aco_berlin52_omp -std=c++17 -O2 -fopenmp
-// Run (expects data/berlin52.tsp, adjust path in main() if needed):
-//   ./aco_berlin52_omp
-// -----------------------------------------------------------------------------
-// Parallelisation strategy:
-//   * loop over ants inside every iteration is embarrassingly parallel – each
-//     ant constructs its tour independently. We parallel-for that loop.
-//   * after ants finish, we merge results in a critical section / reduction to
-//     update the global best and then update the pheromone matrix serially.
-//   * random number generator: thread-local std::mt19937 per thread to avoid
-//     contention.
-// -----------------------------------------------------------------------------
+
 
 #include <iostream>
 #include <vector>
@@ -25,8 +12,8 @@
 #include <chrono>
 #include <iomanip>
 #include <limits>
-#include <omp.h>      // <── OpenMP
-#include <filesystem> // ← dodaj
+#include <omp.h>      
+#include <filesystem> 
 
 // -----------------------------  STRUKTURY DANYCH  -----------------------------
 struct City
@@ -101,10 +88,10 @@ double calc_euc2d(const City &a, const City &b)
 }
 inline void eat_ws_and_colon(std::stringstream &ss)
 {
-    ss >> std::ws;        // spacje przed
-    if (ss.peek() == ':') // jest ':' ?
-        ss.get();         // usuń
-    ss >> std::ws;        // spacje po
+    ss >> std::ws;        
+    if (ss.peek() == ':') 
+        ss.get();         
+    ss >> std::ws;        
 }
 bool parse_tsp_file(const std::string &filename)
 {
@@ -129,7 +116,6 @@ bool parse_tsp_file(const std::string &filename)
         {
             ss >> key;
             std::transform(key.begin(), key.end(), key.begin(), ::toupper);
-            // printf("Parsing key: %s\n", key.c_str());
             if (key == "NAME" || key == "NAME:")
             {
                 eat_ws_and_colon(ss);
@@ -305,7 +291,6 @@ int main()
     constexpr char DATA_DIR[] = "data";
     std::vector<fs::path> tsp_files;
 
-    // zbierz tylko *.tsp
     for (const auto &e : fs::directory_iterator(DATA_DIR))
         if (e.is_regular_file() && e.path().extension() == ".tsp")
             tsp_files.push_back(e.path());
@@ -327,10 +312,8 @@ int main()
         const std::string filename = tsp_files[idx].string();
         std::cout << "\n[" << idx + 1 << "/" << tsp_files.size()
                   << "] " << tsp_files[idx].filename() << "\n";
-
-        // --- dokładnie to, co robiłeś dla jednego pliku ---
         if (!parse_tsp_file(filename))
-            continue; // pomiń, jeśli błąd
+            continue; 
 
         initialize_aco_structs();
 
