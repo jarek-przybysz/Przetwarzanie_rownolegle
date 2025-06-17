@@ -90,10 +90,6 @@ double calculate_att_distance(const City &a, const City &b)
     return std::round(rij);
 }
 
-double calculate_ceil_2d_distance(const City &a, const City &b)
-{
-    return std::ceil(std::sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y)));
-}
 
 // -------------------------------- PARSOWANIE TSPLIB ---------------------------
 bool parse_tsp_file(const std::string &filename)
