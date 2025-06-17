@@ -357,7 +357,7 @@ void run_aco_on_gpu(float *h_distance_matrix, float *h_heuristic_matrix, std::ve
     CHECK_CUDA(cudaMemcpyToSymbol(d_c_evaporation_rate, &evaporation_rate, sizeof(float)));
     CHECK_CUDA(cudaMemcpyToSymbol(d_c_Q, &Q, sizeof(float)));
 
-    int threads_per_block = 256;
+    int threads_per_block = 1024;
     int tour_blocks = (num_ants + threads_per_block - 1) / threads_per_block;
     setup_curand_kernel<<<tour_blocks, threads_per_block>>>(d_rand_states, time(0));
     CHECK_CUDA(cudaDeviceSynchronize());
