@@ -273,8 +273,6 @@ void run_aco(std::vector<int> &global_best_tour, double &global_best_len)
                 construct_tour(ants[i]);
             }
         }
-        // -------------------------------------------------------------------------------
-
         // find best ant in this iteration
         for (const auto &a : ants)
             if (a.tour_length < global_best_len)
