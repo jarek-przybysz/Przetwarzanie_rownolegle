@@ -58,8 +58,7 @@ void run_aco_on_gpu(float *h_distance_matrix, float *h_heuristic_matrix, std::ve
 inline void eat_ws_and_colon(std::stringstream &ss);
 
 float calculate_euc_2d_distance(const City &a, const City &b) { return roundf(sqrtf(powf(a.x - b.x, 2) + powf(a.y - b.y, 2))); }
-float calculate_att_distance(const City &a, const City &b) { return roundf(sqrtf((powf(a.x - b.x, 2) + powf(a.y - b.y, 2)) / 10.0f)); }
-float calculate_ceil_2d_distance(const City &a, const City &b) { return ceilf(sqrtf(powf(a.x - b.x, 2) + powf(a.y - b.y, 2))); }
+
 
 bool parse_tsp_file(const std::string &filename, float *&h_distance_matrix, float *&h_heuristic_matrix)
 {
