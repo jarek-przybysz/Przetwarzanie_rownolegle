@@ -1,6 +1,6 @@
 // Ant Colony Optimization for TSP – OpenMP-parallel version
-//g++-14 aco_par.cpp -o aco_par -std=c++17 -O2 -fopenmp
-//aco_par
+// g++-14 aco_par.cpp -o aco_par -std=c++17 -O2 -fopenmp
+// ./aco_par berlin52.tsp eil101.tsp eil51.tsp pr107.tsp rat99.tsp st70.tsp u159.tsp
 
 #include <iostream>
 #include <vector>
